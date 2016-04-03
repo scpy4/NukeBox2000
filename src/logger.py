@@ -4,12 +4,18 @@ import logging
 class NukeboxLogger:
 
     '''
-    '''
+    B{NukeBox 2000 Logger Class}
+
+      - NukeboxLogger Object
+      - Responsible for:
+
+        - Creating custom logfiles
+      '''
 
     def __init__(self, client):
 
         '''
-        Logger constructor method
+        NukeBoxLogger constructor method
         '''
 
         # Set Up the Instance Variables
@@ -92,7 +98,8 @@ class NukeboxLogger:
     def log(self, msg, level):
         '''
         Logger Level Method
-        - Tests the input string for a specified log level
+
+          - Tests the input string for a specified log level
         '''
 
         # Comparison Dictionary for Callbacks
@@ -151,3 +158,4 @@ class NukeboxLogger:
 # error (speaks for itself really)
 # warning (stuff you might need to display)
 # critical (crash level stuff)
+
