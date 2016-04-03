@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import os.path
+import os
 import getpass
 import pickle
 # from logger import NukeboxLogger
@@ -14,7 +14,12 @@ from twisted.protocols.basic import LineReceiver
 class NukeBoxClientProtocol(LineReceiver):
 
     '''
-    NukeBox 2000 Client Protocol Class
+    B{NukeBox 2000 Client Protocol Class}
+
+      - Main Nukebox Client Protocol Object
+      - Responsible for:
+
+        - File Transfer
     '''
 
     def __init__(self, factory, fname):
@@ -38,11 +43,18 @@ class NukeBoxClientProtocol(LineReceiver):
     def connectionMade(self):
 
         '''
-        Called when a connection is made
+        Called when a connection is made with the server
+
+          - Determines total file size
+          - Pickles & then sends client info to the server
         '''
 
         # Get the Size of the File
         filesize = os.path.getsize(self.fname)
+
+        print('Filesize ' + str(filesize))
+
+        print('Sending Client ' + self.name)
 
         # Serialize the Gathered Data & Send it to the Server
         self.sendLine(pickle.dumps({"size": filesize,
@@ -55,6 +67,9 @@ class NukeBoxClientProtocol(LineReceiver):
 
         '''
         Called when a piece of data is received
+
+          - Receives Ack from server
+          - Initiates File Transfer
         '''
 
         # If the Server Responds with a Request for Transfer, oblige
@@ -85,6 +100,18 @@ class NukeBoxClientProtocol(LineReceiver):
 
 class NukeBoxClientFactory(protocol.ClientFactory):
 
+    '''
+    B{NukeBox 2000 Client Factory Class}
+
+      - Nukebox Client Factory Object
+      - Responsible for:
+
+        - Building Client protocols
+        - Reconnecting to server
+        - Disconnection from server
+        - Destroying the reactor
+    '''
+
     def __init__(self, fname):
 
         '''
@@ -99,8 +126,7 @@ class NukeBoxClientFactory(protocol.ClientFactory):
     def buildProtocol(self, addr):
 
         '''
-        Responsible for building Client Protocol Instances
-        One for each new client
+        Builds instances of Nukebox Client Protocol
         '''
 
         # Build an Instance of the Client Protocol
@@ -109,7 +135,7 @@ class NukeBoxClientFactory(protocol.ClientFactory):
     def clientConnectionFailed(self, connector, reason):
 
         '''
-        Attempt to Reconnect when Connections Fail
+        Attempt to Reconnect when Connections Fails
         '''
 
         # Call the Connect Method on the Transport obj
@@ -119,7 +145,8 @@ class NukeBoxClientFactory(protocol.ClientFactory):
 
         '''
         Lost Connections are Discarded
-        - Stops the Reactor Loop
+
+          - Stops the Reactor Loop
         '''
 
         # Call Disconnect method on the Transport obj & Stop the reactor
@@ -130,7 +157,15 @@ class NukeBoxClientFactory(protocol.ClientFactory):
 class NukeBoxClientBroadcastProtocol(protocol.DatagramProtocol):
 
     '''
-    Implements a UDP Broadcaster to locate the NukeBox 2000 Server
+    B{NukeBox 2000 UDP Class}
+
+      - Nukebox UDP Datagram Protocol Object
+      - Responsible for:
+
+        - Tweaking the underlying socket for UDP
+        - Sending a UDP packet to find the server
+        - Listening for a response
+        - Setting up the TCP Protocol
     '''
 
     def __init__(self, factory):
@@ -171,7 +206,8 @@ class NukeBoxClientBroadcastProtocol(protocol.DatagramProtocol):
 
         '''
         Called when a UDP Response is received
-        - Uses the Responders address to make TCP Connection
+
+          - Uses the Responders address to make TCP Connection
         '''
 
         # Pull the Server IP Address from the Response & Make the Connection
@@ -190,13 +226,19 @@ def main():
 
     # Test Files
     # fname = "05 ELECTRICBLOOM.mp3"
-    # fname = "01 THE FRENCH OPEN.mp3"
+    fname = "01 (THE FRENCH OPEN).mp3"
     # fname = "02 CASSIUS.mp3"
     # fname = "03 RED SOCKS PUGIE.mp3"
-    fname = "08 TWO STEPS TWICE.mp3"
+    # fname = "08 TWO STEPS TWICE.mp3"
 
     # Invalid File Format
     # fname = "jukebox_client.log"
+
+    filesize = os.path.getsize(fname)
+    if filesize == 0:
+
+        print('File has No Content! :( ')
+        os._exit(1)
 
     factory = NukeBoxClientFactory(fname)
 
@@ -209,3 +251,4 @@ def main():
 # this only runs if the module was *not* imported
 if __name__ == '__main__':
     main()
+

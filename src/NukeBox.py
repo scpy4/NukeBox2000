@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
-from collections import deque
+# from collections import deque
+from NukeBoxQueue import NukeBoxQueue
 
 from twistedServer import NukeBoxBroadcastReceiver, NukeboxFactory
 
@@ -10,7 +11,6 @@ from twisted.internet.threads import deferToThread
 
 import os
 import signal
-# import time
 import subprocess
 
 
@@ -20,26 +20,22 @@ if __name__ == '__main__':
 
         '''
         File PlayBack Function
-        - Runs in Thread of its own
-        - Continues to check the Queue for new entries
-        - Calls VLC CLI command to play file
-        - Sleeps for 5 secs if it is empty
+ 
+          - Runs in Thread of its own
+          - Continues to check the Queue for new entries
+          - Calls VLC CLI command to play file
         '''
 
         print('Playback called!')
 
-        # os.setpgrp()
-
         # While the Server is UP
         while True:
-
-            # time.sleep(5)
 
             # If there is an Entry in the Queue
             if len(q) > 0:
 
                 # Pull the Entry at Index 0
-                user_path = q.pop()
+                user_path = q.popleft()
 
                 # Split the String into a User ID & File Path
                 mac_id, path = user_path.split(':')
@@ -67,7 +63,7 @@ if __name__ == '__main__':
         os._exit(0)
 
     # Create the Double Ended Queue (Deque)
-    q = deque()
+    q = NukeBoxQueue()
 
     # Create a Reference to the Users Home Dir
     HOME = os.path.expanduser('~')
@@ -104,3 +100,4 @@ if __name__ == '__main__':
 
     # Run the Reactor
     reactor.run()
+
