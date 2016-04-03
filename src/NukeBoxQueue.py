@@ -6,20 +6,31 @@ import collections
 class NukeBoxQueue(collections.deque):
 
     '''
-    Constructor for NukeBoxQueue
-    - Subclass of collections.deque
+    B{NukeBox 2000 Queue Class}
+
+      - NukeBox Queue Object
+      - Subclass of collections.deque
+      - Responsible for:
+
+        - Adding/Removing items to/from the Queue
     '''
 
     def __init__(self):
 
+        '''
+        Queue Constructor
+
+          - Calls Super on self
+        '''
+
         super(NukeBoxQueue, self).__init__()
-        # self.size_max = 30
 
     def popleft(self):
 
         '''
-        Call on the Deque Pop Method to Retrieve an Entry
-        - Retruns the Retrieved Object
+        Deque Pop Left Method
+
+          - Retrieve & Returns an item
         '''
 
         file = collections.deque.popleft(self)
@@ -30,8 +41,10 @@ class NukeBoxQueue(collections.deque):
     def append(self, value):
 
         '''
-        Calls on the Deque Append Method to Add an Entry
-        - Returns Boolean
+        Deque Append Method
+
+          - Add an item
+          - Returns boolean value
         '''
 
         print('Inside Deque Module: '
@@ -67,3 +80,4 @@ if __name__ == '__main__':
 # Q not empty
 # Queue Now Empty
 # I am an entry
+
