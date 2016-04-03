@@ -34,120 +34,22 @@ session = Session()
 
 class NukeBoxQuery(object):
 
-    '''
-    ---------------------------------------------------------------------------
-    Database Access Object for NukeBox 2000
-    ---------------------------------------------------------------------------
+    """
+    B{NukeBox 2000 Database Query Class}
 
-    - Provides CRUD Methods to manipulate the NukeBox DB
-
-    - Create an Instance of the Class to access methods
-
-    ---------------------------------------------------------------------------
-
-    -- Create Method Syntax - nbq = NukeBoxQuery()
-                              result = nbq.create(**kwargs)
-
-    -- Alternative Syntax   - with NukeBoxQuery() as nbq:
-                                  result = nbq.create(**kwargs)
-
-    ---- Expects a Dictionary of Key: Value Arguments
-    ---- note: must specify the Table ('Model') to target
-
-    ---- e.g. {'Model': 'Files',
-               'path': '/home/music/what_went_down.mp3',
-               'size': 10000,
-               'filetype': 'mp3',
-               'title': 'WHAT WENT DOWN',
-               'artist': 'Foals',
-               'genre': 'Indie',
-               'album': 'WHAT WENT DOWN',
-               'duration': '5:00',
-               'user_id': 2
-               }
-
-    ---- Returns a Row Object ('result')
-    ---- Access Values with result.attribute
-    ---- e.g. print(result.user_id, result.name, result.mac_id)
-
-    ---------------------------------------------------------------------------
-
-    -- Read Method Syntax - result = nbq.read(**kwargs)
-
-    -- Alternative Syntax - with NukeBoxQuery() as nbq:
-                                  result = nbq.read(**kwargs)
-
-    ---- Expects a Dictionary of Key: Value Arguments
-    ---- Use 'mac_id' attribute to identify Users
-    ---- Use 'path' or 'title' to identify Files
-
-    ---- note: must specify the Table ('Model') to target
-
-    ---- e.g. {'Model': 'Users',
-               'mac_id': '0987654321'
-               }
-
-    ---- Returns a Row Object ('result')
-    ---- Access Values with result.attribute
-    ---- e.g. print(result.user_id, result.name, result.mac_id)
-
-    ---------------------------------------------------------------------------
-
-    -- Update Method Syntax - nbq.read(**kwargs)
-
-    -- Alternative Syntax   - with NukeBoxQuery() as nbq:
-                                  result = nbq.update(**kwargs)
-
-    ---- Expects a Dictionary of Key: Value Arguments
-    ---- Use 'mac_id' attribute to identify Users
-    ---- Use 'path' or 'title' to identify Files
-
-    ---- note: kwargs must specify the Table ('Model') to target,
-                                   the Column ('column') to filter on &
-                                   the Value ('value') to update
-
-    ---- e.g. {'Model': 'Files',
-               'column': 'path',
-               'value': '/home/nukebox/what_went_down.mp3',
-               'path': '/home/music/what_went_down.mp3'
-               }
-
-    ---- Returns Boolean to Indicate Success / Failure
-
-    ---------------------------------------------------------------------------
-
-    -- Delete Method Syntax - nbq.delete(**kwargs)
-
-    -- Alternative Syntax   - with NukeBoxQuery() as nbq:
-                                  result = nbq.delete(**kwargs)
-
-    ---- Expects a Dictionary of Key: Value Arguments
-    ---- Use 'mac_id' attribute to identify Users
-    ---- Use 'path' or 'title' to identify Files
-
-    ---- note: must specify the Table ('Model') to target,
-                            the Column ('column') to filter on &
-                            the Value ('value') to delete on
-
-    ---- e.g. {'Model': 'Usersrs',
-               'column': 'mac_id',
-               'value': '0123456789'
-               }
-
-    ---- Returns Boolean to Indicate Success / Failure
-
-    ---------------------------------------------------------------------------
-    ---------------------------------------------------------------------------
-
-    '''
+      - NukeBox 2000 Database Access Object
+      - Provides CRUD Methods to manipulate the NukeBox DB
+    """
 
     def __init__(self):
 
         '''
         NukeBox 2000 Constructor Method
-        - Constructs a Instance Dictionary used to match a string to a
-          Class Model
+
+        Constructs a Instance Dictionary used to match a string to a
+        Class Model
         '''
+
         # Models Dict
         self.tables = {'Users': Users,
                        'Files': Files
@@ -155,9 +57,16 @@ class NukeBoxQuery(object):
 
     def __enter__(self):
 
+        '''
+        Simply returns the instance
+        '''
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
+
+        '''
+        Clean Up
+        '''
         print('Cleaning Up DB Instance')
         pass
 
@@ -166,9 +75,41 @@ class NukeBoxQuery(object):
 
         '''
         Allows NukeBox create new entries in the db for all Tables
-        - Takes a Dictionary of Details as an argument
-        - Checks which Table to target
-        - Returns a Row Object
+
+          - Takes a Dictionary of Details as an argument.
+          - Checks which Table to target.
+          - Returns a Row Object.
+
+        B{Syntax}
+
+          - Create Method Syntax
+
+          >>> nbq = NukeBoxQuery()
+          >>> result = nbq.create(**kwargs)
+
+          - Alternative Syntax
+
+          >>> with NukeBoxQuery() as nbq:
+          >>> ...    result = nbq.create(**kwargs)
+
+          - Expects a Dictionary of Key: Value Arguments.
+
+          Note: must specify the Table ('Model') to target, for example:
+
+          >>> {'Model': 'Files',
+               'path': '/home/music/what_went_down.mp3',
+               'size': 10000,
+               'filetype': 'mp3',
+               'title': 'WHAT WENT DOWN',
+               'artist': 'Foals',
+               'genre': 'Indie',
+               'album': 'WHAT WENT DOWN',
+               'duration': '5:00', 'user_id': 2}
+
+          - Returns a Row Object ('result')
+          - Access Values with result.attribute
+
+          >>> print(result.user_id, result.name, result.mac_id)
         '''
 
         # Pull the Model that we want to work with
@@ -226,26 +167,45 @@ class NukeBoxQuery(object):
     # Read Method
     def read(self, **details):
 
-        '''
-        Reads can only be performed using unique entries in the DB
-        -- Files can only be filtered on its 'path' & 'title' attributes
-        -- Users can only be filtered on its 'mac_id' attribute
-        -- Returns a Row Object
+        """
+        Reads can only be performed using unique entries in the DB.
+
+          - Files can only be filtered on its 'path' & 'title' attributes.
+          - Users can only be filtered on its 'mac_id' attribute.
+          - Returns a Row Object.
 
         The program has access to the path & title variables which can
         uniquely identify rows in the Files Table. It can use the mac_id
         variable to do the same for the Users Table.
-
         No other values can be used because they would not be unique &
         queries might result in multiple matches e.g. artists, duration
         etc. As such reading may raise Exceptions.
 
-        e.g querying on the artist attribute might return multiple files
-        which is not what is needed for the NukeBox to function.
+        B{Syntax}
 
-        Note: Some part of the program may require Multiple Results & they
-        can still be added later
-        '''
+            - Read Method Syntax
+
+            >>> result = nbq.read(**kwargs)
+
+            - Alternative Syntax
+
+            >>> with NukeBoxQuery() as nbq:
+            >>> ...    result = nbq.read(**kwargs)
+
+            - Expects a Dictionary of Key: Value Arguments.
+              - Use 'mac_id' attribute to identify Users.
+              - Use 'path' or 'title' to identify Files.
+
+            Note: must specify the Table ('Model') to target, for example
+
+            >>> {'Model': 'Users',
+                 'mac_id': '0987654321'}
+
+            - Returns a Row Object ('result')
+            - Access Values with result.attribute
+
+            >>> print(result.user_id, result.name, result.mac_id)
+        """
 
         # Pull the Model that we want to work with
         model_choice = details['Model']
@@ -263,11 +223,12 @@ class NukeBoxQuery(object):
     # Update Method
     def update(self, **details):
 
-        '''
+        """
         Updates can only be performed using unique entries in the DB
-        -- Files can only be filtered on its 'path' & 'title' attributes
-        -- Users can only be filtered on its 'mac_id' attribute
-        -- Returns Boolean Value
+
+          - Files can only be filtered on its 'path' & 'title' attributes
+          - Users can only be filtered on its 'mac_id' attribute
+          - Returns Boolean Value
 
         The program has access to the path & title variables which can
         uniquely identify rows in the Files Table. It can use the mac_id
@@ -277,9 +238,32 @@ class NukeBoxQuery(object):
         queries might result in multiple matches e.g. artists, duration
         etc. As such updating could corupt the data.
 
-        e.g querying on the artist attribute might return multiple files
-        which is not what is needed for the NukeBox to function
-        '''
+        B{Syntax}
+
+          - Update Method Syntax
+
+          >>> nbq.read(**kwargs)
+
+          - Alternative Syntax
+
+          >>> with NukeBoxQuery() as nbq:
+          >>> ...    result = nbq.update(**kwargs)
+
+          - Expects a Dictionary of Key: Value Arguments
+          - Use 'mac_id' attribute to identify Users
+          - Use 'path' or 'title' to identify Files
+
+          Note: kwargs must specify the Table ('Model') to target,
+          the Column ('column') to filter on & the Value ('value') to update
+          , for example:
+
+          >>> {'Model': 'Files',
+               'column': 'path',
+               'value': '/home/nukebox/what_went_down.mp3',
+               'path': '/home/music/what_went_down.mp3'}
+
+          - Returns Boolean to Indicate Success / Failure
+        """
 
         # Pull the Model that we want to work with
         model_choice = details['Model']
@@ -329,9 +313,10 @@ class NukeBoxQuery(object):
 
         '''
         Deletes can only be performed using unique entries in the DB
-        -- Files can only be filtered on its 'path' & 'title' attributes
-        -- Users can only be filtered on its 'mac_id' attribute
-        -- Returns Boolean Value
+
+          - Files can only be filtered on its 'path' & 'title' attributes
+          - Users can only be filtered on its 'mac_id' attribute
+          - Returns Boolean Value
 
         The program has access to the path & title variables which can
         uniquely identify rows in the Files Table. It can use the mac_id
@@ -341,9 +326,29 @@ class NukeBoxQuery(object):
         queries would result in multiple matches e.g. artists, duration
         etc. As such deleting could remove the wrong data.
 
-        e.g deleting entries using the duration entry to filter on might
-        result in multiple results with the sam duration, all of which
-        might be removed.
+        B{Syntax}
+
+          - Delete Method Syntax
+
+          >>> nbq.delete(**kwargs)
+
+          - Alternative Syntax
+
+          >>> with NukeBoxQuery() as nbq:
+          >>> ...    result = nbq.delete(**kwargs)
+
+          - Expects a Dictionary of Key: Value Arguments
+            - Use 'mac_id' attribute to identify Users
+            - Use 'path' or 'title' to identify Files
+
+          Note: must specify the 'Model' to target, the 'column'
+          to filter on & the 'value' to delete on, for example:
+
+          >>> {'Model': 'Users',
+               'column': 'mac_id',
+               'value': '0123456789'}
+
+          - Returns Boolean to Indicate Success / Failure
         '''
 
         # Pull the Model that we want to work with
@@ -377,3 +382,4 @@ class NukeBoxQuery(object):
 # it gets dropped immediately, so it would log in & out in the time it
 # takes to transfer the file. Could attach a "Number of Times Logged in"
 # entry too, could be handy.
+

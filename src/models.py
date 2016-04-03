@@ -31,6 +31,11 @@ Base.metadata.create_all(engine)
 
 # Class Mapped to Users Table
 class Users(Base):
+
+    '''
+    B{Users Table Object}
+    '''
+
     __tablename__ = 'users'
 
     user_id = Column(Integer, autoincrement=True, primary_key=True)
@@ -44,6 +49,11 @@ class Users(Base):
 
 # Class Mapped to Files table
 class Files(Base):
+
+    '''
+    B{Files Table Object}
+    '''
+
     __tablename__ = 'files'
 
     file_id = Column(Integer, autoincrement=True, primary_key=True)
@@ -63,7 +73,9 @@ class Files(Base):
 class NukeBoxMgr(object):
 
     '''
-    Class to Contain Static Method "Get or Create"
+    B{Nukebox Manager Class}
+
+      - Class to Contain Static Method "Get or Create"
     '''
 
     @staticmethod
@@ -84,3 +96,4 @@ class NukeBoxMgr(object):
             print('Does not Exist!')
             obj = model(**filters)
             return False, obj
+
