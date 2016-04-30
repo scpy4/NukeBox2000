@@ -16,6 +16,9 @@ from sqlalchemy.orm import scoped_session
 # Create the DB Engine
 engine = create_engine('mysql+mysqldb://root:root@localhost/nukebox')
 
+# For testing purposes, comment original engine & uncomment below to run in "in memory" db
+# engine = create_engine('sqlite://')
+
 # Create a configured "Session" class
 Session = scoped_session(sessionmaker(bind=engine))
 
