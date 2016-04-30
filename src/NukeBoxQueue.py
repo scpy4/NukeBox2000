@@ -58,6 +58,7 @@ class NukeBoxQueue(collections.deque):
 
 if __name__ == '__main__':
 
+    # Testing
     to_q_1 = 'I am an entry'
     to_q_2 = 'I am also an entry'
     q = NukeBoxQueue()
