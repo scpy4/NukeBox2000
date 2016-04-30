@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>twistedServer.NukeBoxProtocol : API documentation</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <link href="apidocs.css" type="text/css" rel="stylesheet" />
+    
+    
+  </head>
+  <body>
+    <h1 class="class">t.NukeBoxProtocol(<span title="twisted.protocols.basic.LineReceiver">LineReceiver</span>) : class documentation</h1>
+    <p>
+      <span id="part">Part of <a href="twistedServer.html">twistedServer</a></span>
+      
+      <a href="classIndex.html#twistedServer.NukeBoxProtocol">View In Hierarchy</a>
+    </p>
+    <div>
+      
+    </div>
+    <div class="docstring">
+      <div><p><b>NukeBox 2000 Server Protocol Class</b></p>
+<ul>
+  <li>
+    Main Nukebox Protocol Object
+  </li>
+  <li>
+    Responsible for:
+    <ul>
+      <li>
+        File Transfer
+      </li>
+      <li>
+        DB Access
+      </li>
+      <li>
+        Queuing
+      </li>
+      <li>
+        Error Checking
+      </li>
+    </ul>
+  </li>
+</ul><table class="fieldTable"></table></div>
+    </div>
+
+    
+    <div id="splitTables">
+      <table class="children sortable" id="id15">
+  
+  
+  <tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="twistedServer.NukeBoxProtocol.html#__init__">__init__</a></td>
+    <td><span>Protocol Constructor</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="twistedServer.NukeBoxProtocol.html#connectionMade">connectionMade</a></td>
+    <td><span>Called when the Server receives a new connection</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="twistedServer.NukeBoxProtocol.html#connectionLost">connectionLost</a></td>
+    <td><span>Called when the Server loses a connection</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="twistedServer.NukeBoxProtocol.html#lineReceived">lineReceived</a></td>
+    <td><span>Directs new user instances to the Register method</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="twistedServer.NukeBoxProtocol.html#register">register</a></td>
+    <td><span>Registers New Clients</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="twistedServer.NukeBoxProtocol.html#rawDataReceived">rawDataReceived</a></td>
+    <td><span>Receives the Raw File data</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="twistedServer.NukeBoxProtocol.html#validateFile">validateFile</a></td>
+    <td><span>File Validation Method</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="twistedServer.NukeBoxProtocol.html#queueFile">queueFile</a></td>
+    <td><span>File Registration</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="twistedServer.NukeBoxProtocol.html#moveFile">moveFile</a></td>
+    <td><span>Transfers the Temp File to the Default save Directory</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="twistedServer.NukeBoxProtocol.html#invalidFile">invalidFile</a></td>
+    <td><span>Reports Invalid File</span></td>
+  </tr>
+</table>
+      
+    </div>
+    
+    
+
+    <div class="function">
+  <a name="twistedServer.NukeBoxProtocol.__init__">
+    
+  </a>
+  <a name="__init__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    __init__(self, factory):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Protocol Constructor</p><table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="twistedServer.NukeBoxProtocol.connectionMade">
+    
+  </a>
+  <a name="connectionMade">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    connectionMade(self):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Called when the Server receives a new connection</p><table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="twistedServer.NukeBoxProtocol.connectionLost">
+    
+  </a>
+  <a name="connectionLost">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    connectionLost(self, reason):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Called when the Server loses a connection</p><table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="twistedServer.NukeBoxProtocol.lineReceived">
+    
+  </a>
+  <a name="lineReceived">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    lineReceived(self, data):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Directs new user instances to the Register method</p><table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="twistedServer.NukeBoxProtocol.register">
+    
+  </a>
+  <a name="register">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    register(self, data):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Registers New Clients</p>
+<ul>
+  <li>
+    Deconstructs Data
+  </li>
+  <li>
+    Adds User Entry to DB
+  </li>
+  <li>
+    Sets the User Instance State
+  </li>
+  <li>
+    Initiates File Transfer from Client
+  </li>
+</ul><table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="twistedServer.NukeBoxProtocol.rawDataReceived">
+    
+  </a>
+  <a name="rawDataReceived">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    rawDataReceived(self, data):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Receives the Raw File data</p>
+<ul>
+  <li>
+    Outputs Transfer to stdout
+  </li>
+  <li>
+    Writes Data to Temp File
+  </li>
+  <li>
+    Calls Validate and Tests the Result
+  </li>
+  <li>
+    Sends Ack to Client
+  </li>
+</ul><table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="twistedServer.NukeBoxProtocol.validateFile">
+    
+  </a>
+  <a name="validateFile">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    validateFile(self, path, d):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>File Validation Method</p>
+<ul>
+  <li>
+    Invokes the Queue File or Invalid File methods
+  </li>
+  <li>
+    Temp validation using id3 tags
+  </li>
+</ul><table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="twistedServer.NukeBoxProtocol.queueFile">
+    
+  </a>
+  <a name="queueFile">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    queueFile(self, path):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>File Registration</p>
+<ul>
+  <li>
+    Adds File to the Queuing System
+  </li>
+  <li>
+    Adds an Entry to the DB
+  </li>
+  <li>
+    Invokes Move File Method on Success
+  </li>
+  <li>
+    Invokes Invalid method on Failure
+  </li>
+</ul><table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="twistedServer.NukeBoxProtocol.moveFile">
+    
+  </a>
+  <a name="moveFile">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    moveFile(self, result):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Transfers the Temp File to the Default save Directory</p>
+<ul>
+  <li>
+    Ends Callback Chain
+  </li>
+</ul><table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="twistedServer.NukeBoxProtocol.invalidFile">
+    
+  </a>
+  <a name="invalidFile">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    invalidFile(self, failure):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Reports Invalid File</p>
+<ul>
+  <li>
+    Receives a Exception
+  </li>
+  <li>
+    Removes the Temp File if needs be
+  </li>
+  <li>
+    Ends the Errback Chain
+  </li>
+</ul><table class="fieldTable"></table></div>
+  </div>
+</div>
+    <address>
+      <a href="index.html">API Documentation</a> for logger/models/NukeBoxDB/NukeBox/NukeBoxQueue/twistedClient/twistedServer, generated by <a href="http://codespeak.net/~mwh/pydoctor/">pydoctor</a> at 2016-04-03 13:03:36.
+    </address>
+  </body>
+</html>
