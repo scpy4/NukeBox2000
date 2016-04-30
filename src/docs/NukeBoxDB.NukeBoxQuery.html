@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>NukeBoxDB.NukeBoxQuery : API documentation</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <link href="apidocs.css" type="text/css" rel="stylesheet" />
+    
+    
+  </head>
+  <body>
+    <h1 class="class">N.NukeBoxQuery(<span title="object">object</span>) : class documentation</h1>
+    <p>
+      <span id="part">Part of <a href="NukeBoxDB.html">NukeBoxDB</a></span>
+      
+      <a href="classIndex.html#NukeBoxDB.NukeBoxQuery">View In Hierarchy</a>
+    </p>
+    <div>
+      
+    </div>
+    <div class="docstring">
+      <div><p><b>NukeBox 2000 Database Query Class</b></p>
+<ul>
+  <li>
+    NukeBox 2000 Database Access Object
+  </li>
+  <li>
+    Provides CRUD Methods to manipulate the NukeBox DB
+  </li>
+</ul><table class="fieldTable"></table></div>
+    </div>
+
+    
+    <div id="splitTables">
+      <table class="children sortable" id="id6">
+  
+  
+  <tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="NukeBoxDB.NukeBoxQuery.html#__init__">__init__</a></td>
+    <td><span>NukeBox 2000 Constructor Method</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="NukeBoxDB.NukeBoxQuery.html#__enter__">__enter__</a></td>
+    <td><span>Simply returns the instance</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="NukeBoxDB.NukeBoxQuery.html#__exit__">__exit__</a></td>
+    <td><span>Clean Up</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="NukeBoxDB.NukeBoxQuery.html#create">create</a></td>
+    <td><span>Allows NukeBox create new entries in the db for all Tables</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="NukeBoxDB.NukeBoxQuery.html#read">read</a></td>
+    <td><span>Reads can only be performed using unique entries in the DB.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="NukeBoxDB.NukeBoxQuery.html#update">update</a></td>
+    <td><span>Updates can only be performed using unique entries in the DB</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="NukeBoxDB.NukeBoxQuery.html#delete">delete</a></td>
+    <td><span>Deletes can only be performed using unique entries in the DB</span></td>
+  </tr>
+</table>
+      
+    </div>
+    
+    
+
+    <div class="function">
+  <a name="NukeBoxDB.NukeBoxQuery.__init__">
+    
+  </a>
+  <a name="__init__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    __init__(self):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>NukeBox 2000 Constructor Method</p>
+<p>Constructs a Instance Dictionary used to match a string to a Class 
+Model</p><table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="NukeBoxDB.NukeBoxQuery.__enter__">
+    
+  </a>
+  <a name="__enter__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    __enter__(self):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Simply returns the instance</p><table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="NukeBoxDB.NukeBoxQuery.__exit__">
+    
+  </a>
+  <a name="__exit__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    __exit__(self, exc_type, exc_value, traceback):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Clean Up</p><table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="NukeBoxDB.NukeBoxQuery.create">
+    
+  </a>
+  <a name="create">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    create(self, details):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Allows NukeBox create new entries in the db for all Tables</p>
+<ul>
+  <li>
+    Takes a Dictionary of Details as an argument.
+  </li>
+  <li>
+    Checks which Table to target.
+  </li>
+  <li>
+    Returns a Row Object.
+  </li>
+</ul>
+<p><b>Syntax</b></p>
+<ul>
+  <li>
+    Create Method Syntax
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>nbq = NukeBoxQuery()
+<span class="py-prompt">&gt;&gt;&gt; </span>result = nbq.create(**kwargs)</pre>
+  </li>
+  <li>
+    Alternative Syntax
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>with NukeBoxQuery() <span class="py-keyword">as</span> nbq:
+<span class="py-prompt">&gt;&gt;&gt; </span>...    result = nbq.create(**kwargs)</pre>
+  </li>
+  <li>
+    Expects a Dictionary of Key: Value Arguments.
+    <p>Note: must specify the Table ('Model') to target, for example:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>{<span class="py-string">'Model'</span>: <span class="py-string">'Files'</span>,
+<span class="py-output">     'path': '/home/music/what_went_down.mp3',</span>
+<span class="py-output">     'size': 10000,</span>
+<span class="py-output">     'filetype': 'mp3',</span>
+<span class="py-output">     'title': 'WHAT WENT DOWN',</span>
+<span class="py-output">     'artist': 'Foals',</span>
+<span class="py-output">     'genre': 'Indie',</span>
+<span class="py-output">     'album': 'WHAT WENT DOWN',</span>
+<span class="py-output">     'duration': '5:00', 'user_id': 2}</span></pre>
+  </li>
+  <li>
+    Returns a Row Object ('result')
+  </li>
+  <li>
+    Access Values with result.attribute
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span>(result.user_id, result.name, result.mac_id)</pre>
+  </li>
+</ul><table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="NukeBoxDB.NukeBoxQuery.read">
+    
+  </a>
+  <a name="read">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    read(self, **details):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Reads can only be performed using unique entries in the DB.</p>
+<ul>
+  <li>
+    Files can only be filtered on its 'path' &amp; 'title' attributes.
+  </li>
+  <li>
+    Users can only be filtered on its 'mac_id' attribute.
+  </li>
+  <li>
+    Returns a Row Object.
+  </li>
+</ul>
+<p>The program has access to the path &amp; title variables which can 
+uniquely identify rows in the Files Table. It can use the mac_id variable 
+to do the same for the Users Table. No other values can be used because 
+they would not be unique &amp; queries might result in multiple matches 
+e.g. artists, duration etc. As such reading may raise Exceptions.</p>
+<p><b>Syntax</b></p>
+<ul>
+  <li>
+    Read Method Syntax
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>result = nbq.read(**kwargs)</pre>
+  </li>
+  <li>
+    Alternative Syntax
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>with NukeBoxQuery() <span class="py-keyword">as</span> nbq:
+<span class="py-prompt">&gt;&gt;&gt; </span>...    result = nbq.read(**kwargs)</pre>
+  </li>
+  <li>
+    Expects a Dictionary of Key: Value Arguments.
+    <ul>
+      <li>
+        Use 'mac_id' attribute to identify Users.
+      </li>
+      <li>
+        Use 'path' or 'title' to identify Files.
+      </li>
+    </ul>
+    <p>Note: must specify the Table ('Model') to target, for example</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>{<span class="py-string">'Model'</span>: <span class="py-string">'Users'</span>,
+<span class="py-output">     'mac_id': '0987654321'}</span></pre>
+  </li>
+  <li>
+    Returns a Row Object ('result')
+  </li>
+  <li>
+    Access Values with result.attribute
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span>(result.user_id, result.name, result.mac_id)</pre>
+  </li>
+</ul><table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="NukeBoxDB.NukeBoxQuery.update">
+    
+  </a>
+  <a name="update">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    update(self, **details):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Updates can only be performed using unique entries in the DB</p>
+<ul>
+  <li>
+    Files can only be filtered on its 'path' &amp; 'title' attributes
+  </li>
+  <li>
+    Users can only be filtered on its 'mac_id' attribute
+  </li>
+  <li>
+    Returns Boolean Value
+  </li>
+</ul>
+<p>The program has access to the path &amp; title variables which can 
+uniquely identify rows in the Files Table. It can use the mac_id variable 
+to do the same for the Users Table.</p>
+<p>No other values can be used because they would not be unique &amp; 
+queries might result in multiple matches e.g. artists, duration etc. As 
+such updating could corupt the data.</p>
+<p><b>Syntax</b></p>
+<ul>
+  <li>
+    Update Method Syntax
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>nbq.read(**kwargs)</pre>
+  </li>
+  <li>
+    Alternative Syntax
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>with NukeBoxQuery() <span class="py-keyword">as</span> nbq:
+<span class="py-prompt">&gt;&gt;&gt; </span>...    result = nbq.update(**kwargs)</pre>
+  </li>
+  <li>
+    Expects a Dictionary of Key: Value Arguments
+  </li>
+  <li>
+    Use 'mac_id' attribute to identify Users
+  </li>
+  <li>
+    Use 'path' or 'title' to identify Files
+    <p>Note: kwargs must specify the Table ('Model') to target, the Column 
+    ('column') to filter on &amp; the Value ('value') to update , for 
+    example:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>{<span class="py-string">'Model'</span>: <span class="py-string">'Files'</span>,
+<span class="py-output">     'column': 'path',</span>
+<span class="py-output">     'value': '/home/nukebox/what_went_down.mp3',</span>
+<span class="py-output">     'path': '/home/music/what_went_down.mp3'}</span></pre>
+  </li>
+  <li>
+    Returns Boolean to Indicate Success / Failure
+  </li>
+</ul><table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="NukeBoxDB.NukeBoxQuery.delete">
+    
+  </a>
+  <a name="delete">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    delete(self, **details):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Deletes can only be performed using unique entries in the DB</p>
+<ul>
+  <li>
+    Files can only be filtered on its 'path' &amp; 'title' attributes
+  </li>
+  <li>
+    Users can only be filtered on its 'mac_id' attribute
+  </li>
+  <li>
+    Returns Boolean Value
+  </li>
+</ul>
+<p>The program has access to the path &amp; title variables which can 
+uniquely identify rows in the Files Table. It can use the mac_id variable 
+to do the same for the Users Table.</p>
+<p>No other values can be used because they would not be unique &amp; 
+queries would result in multiple matches e.g. artists, duration etc. As 
+such deleting could remove the wrong data.</p>
+<p><b>Syntax</b></p>
+<ul>
+  <li>
+    Delete Method Syntax
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>nbq.delete(**kwargs)</pre>
+  </li>
+  <li>
+    Alternative Syntax
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>with NukeBoxQuery() <span class="py-keyword">as</span> nbq:
+<span class="py-prompt">&gt;&gt;&gt; </span>...    result = nbq.delete(**kwargs)</pre>
+  </li>
+  <li>
+    Expects a Dictionary of Key: Value Arguments
+    <ul>
+      <li>
+        Use 'mac_id' attribute to identify Users
+      </li>
+      <li>
+        Use 'path' or 'title' to identify Files
+      </li>
+    </ul>
+    <p>Note: must specify the 'Model' to target, the 'column' to filter on 
+    &amp; the 'value' to delete on, for example:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>{<span class="py-string">'Model'</span>: <span class="py-string">'Users'</span>,
+<span class="py-output">     'column': 'mac_id',</span>
+<span class="py-output">     'value': '0123456789'}</span></pre>
+  </li>
+  <li>
+    Returns Boolean to Indicate Success / Failure
+  </li>
+</ul><table class="fieldTable"></table></div>
+  </div>
+</div>
+    <address>
+      <a href="index.html">API Documentation</a> for logger/models/NukeBoxDB/NukeBox/NukeBoxQueue/twistedClient/twistedServer, generated by <a href="http://codespeak.net/~mwh/pydoctor/">pydoctor</a> at 2016-04-03 13:03:36.
+    </address>
+  </body>
+</html>
