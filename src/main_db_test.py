@@ -117,8 +117,8 @@ file_obj = nbq.create(file_details)
 
 # update_user = {'Model': 'Users',
 #                'column': 'mac_id',
-#                'value': 'roger_mac',
-#                'mac_id': 'roger2_mac'
+#                'value': '0987654321',
+#                'mac_id': '1234567890'
 #                }
 
 # # Call to the Update Method
@@ -138,7 +138,7 @@ file_obj = nbq.create(file_details)
 # # Specify the Column to Delete on & it's value!
 # delete_user = {'Model': 'Users',
 #                'column': 'mac_id',
-#                'value': 'roger2_mac'
+#                'value': '0987654321'
 #                }
 
 # # Call to the Delete Method
