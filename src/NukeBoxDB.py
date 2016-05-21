@@ -375,14 +375,3 @@ class NukeBoxQuery(object):
             # No match
             return False
 
-
-#  # Things To Do (maybe)
-
-# Add a "Logged In" entry in the table, could easily update it from
-# the main server when the user disconnects.
-# It would have to be more of "Last Logged In" come to think of it.
-# We don't hold a connection to the client after we receive the file,
-# it gets dropped immediately, so it would log in & out in the time it
-# takes to transfer the file. Could attach a "Number of Times Logged in"
-# entry too, could be handy.
-
